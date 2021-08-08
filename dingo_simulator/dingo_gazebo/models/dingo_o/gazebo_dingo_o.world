@@ -338,6 +338,65 @@
       </sensor>
     </link>
 
+    <link name="front_laser">
+      <pose>0.200 0.0 0.064263 0 0 0</pose>
+      <collision name="lidar_sensor_collision">
+        <pose>0.0 0 0.0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.0508</radius>
+            <length>0.055</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <visual name="lidar_sensor_visual">
+        <pose>0.0 0 0.0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>/home/hossein/dingo_ws/src/dingo/dingo_description/meshes/hokuyo_ust10.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <!-- feel free to change the ray parameters based on your lidar spec -->
+      <sensor name="hls_lfcd_lds" type="ray">
+        <always_on>true</always_on>
+        <visualize>true</visualize>
+        <pose>0.0 0 0.05 0 0 0</pose>
+        <update_rate>20</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>720</samples>
+              <resolution>1.000000</resolution>
+              <min_angle>0.000000</min_angle>
+              <max_angle>6.280000</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.10000</min>
+            <max>10.0</max>
+            <resolution>0.01000</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.001</stddev>
+          </noise>
+        </ray>
+        <plugin name="dingo_laserscan" filename="libgazebo_ros_ray_sensor.so">
+          <ros>
+            <remapping>~/out:=scan</remapping>
+          </ros>
+          <output_type>sensor_msgs/LaserScan</output_type>
+          <frame_name>front_laser</frame_name>
+        </plugin>
+      </sensor>
+    </link>
+
+    <link name="front_laser_mount">
+      <pose>0.200 0.0 0.064263 0 0 0</pose>
+    </link>
 
 
     <joint name="base_footprint_joint" type="fixed">
@@ -383,6 +442,100 @@
         <xyz>0 1 0</xyz>
       </axis>
     </joint>
+
+    <joint name="imu_joint" type="fixed">
+      <parent>chassis_link</parent>
+      <child>imu_link</child>
+    </joint>
+
+    <joint name="front_laser_mount_joint" type="fixed">
+      <parent>front_mount</parent>
+      <child>front_laser_mount</child>
+    </joint>
+
+    <joint name="lidar_joint" type="fixed">
+      <parent>front_laser_mount</parent>
+      <child>front_laser</child>
+    </joint>
+
+     <!--
+    Mounting points for accessories in the top channel.
+    These are flush with the top of the robot and all oriented to face forwards.
+    Dingo-D has 6 evenly-spaced 80mm mounts
+    We name the mounts (from front to back)
+      - front
+      - front b
+      - front c
+      - rear c
+      - rear b
+      - rear
+    -->
+    <link name="front_mount">
+      <pose>0.240 0.0 0.064263 0 0 0</pose> 
+    </link>
+    <link name="front_b_mount">
+      <pose>0.160 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="front_c_mount">
+      <pose>0.080 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_mount">
+      <pose>-0.080 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_b_mount">
+      <pose>-0.16 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_c_mount">
+      <pose>-0.24 0 0.064263 0 0 0</pose>
+    </link>
+    <link name="mid_mount">
+      <pose>0 0 0.069023 0 0 0</pose>
+    </link>
+
+
+    <joint name="mid_mount_joint" type="fixed">
+      <parent>chassis_link</parent>
+      <child>mid_mount</child>
+    </joint>
+
+    <joint name="front_c_mount_joint" type="fixed">
+      <parent>chassis_link</parent>
+      <child>front_c_mount</child>
+    </joint>
+    <joint name="front_b_mount_joint" type="fixed">
+      <parent>front_c_mount</parent>
+      <child>front_b_mount</child>
+    </joint>
+    <joint name="front_mount_joint" type="fixed">
+      <parent>front_b_mount</parent>
+      <child>front_mount</child>
+    </joint>
+    <joint name="rear_c_mount_joint" type="fixed">
+      <parent>chassis_link</parent>
+      <child>rear_c_mount</child>
+    </joint>
+    <joint name="rear_b_mount_joint" type="fixed">
+      <parent>rear_c_mount</parent>
+      <child>rear_b_mount</child>
+    </joint>
+    <joint name="rear_mount_joint" type="fixed">
+      <parent>rear_b_mount</parent>
+      <child>rear_mount</child>
+    </joint>
+
+    <!--
+      Mounting point for accessories on the front bumper.
+      Use with caution, but thin sensors (e.g Raspberry Pi NoIR camera) could
+      be mounted here for low-budget, front-facing capabilities
+    -->
+    <link name="front_bumper_mount">
+      <pose>0.274 0 0.0345125 0 0 0</pose>
+    </link>
+    <joint name="front_bumper_mount_joint" type="fixed">
+      <parent>chassis_link</parent>
+      <child>front_bumper_mount</child>
+    </joint>
+
 
   </model>
   </world>

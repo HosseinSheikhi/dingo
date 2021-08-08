@@ -75,8 +75,14 @@
     <origin xyz="${-wheelbase/2} ${-track/2-wheel_width/2} ${wheel_vertical_offset}" rpy="0 0 0" />
   </xacro:wheel>
 
+  <link name="base_footprint"></link>
   <link name="base_link"></link>
 
+  <joint name="base_footprint_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+  </joint>
   <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="base_link"/>
@@ -118,6 +124,27 @@
     <child link="imu_link" />
   </joint>
 
+  <link name="front_laser">
+    <origin xyz="0 0 0.085" rpy="0 0 0" /> <!-- TODO, not quite sure! -->
+    <inertial>
+      <mass value="1.1"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.00307156543804" ixy="0.0" ixz="0.0" iyy="0.0031284904152700005" iyz="0.0" izz="0.00196432421427"/>
+    </inertial>
+  </link>
+
+  <link name="front_laser_mount"></link>
+
+
+  <joint name="front_laser_joint" type="fixed">
+    <parent link="front_laser_mount" />
+    <child link="front_laser" />
+  </joint>
+
+  <joint name="front_laser_mount_joint" type="fixed">
+    <parent link="front_mount" />
+    <child link="front_laser_mount" />
+  </joint>
   <!--
     Mounting points for accessories in the top channel.
     These are flush with the top of the robot and all oriented to face forwards.

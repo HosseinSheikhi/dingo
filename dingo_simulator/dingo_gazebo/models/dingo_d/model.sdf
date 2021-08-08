@@ -407,7 +407,7 @@
       <parent>rear_c_mount</parent>
       <child>rear_b_mount</child>
     </joint>
-    <joint name="rear_moint_joint" type="fixed">
+    <joint name="rear_mount_joint" type="fixed">
       <parent>rear_b_mount</parent>
       <child>rear_mount</child>
     </joint>
