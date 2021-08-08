@@ -12,7 +12,7 @@ from launch.substitutions import LaunchConfiguration, Command
 import launch_ros
 
 def generate_launch_description():
-    DINGO_MODEL = 'd' #os.environ['DINGO_MODEL'] #d - o
+    DINGO_MODEL = os.environ['DINGO_MODEL'] #d - o
     dingo_urdf_file_name = 'dingo-' + DINGO_MODEL + '.urdf.xacro'
     dingo_urdf_file_address = os.path.join(get_package_share_directory('dingo_gazebo'),'urdf',dingo_urdf_file_name)
 

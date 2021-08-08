@@ -247,7 +247,7 @@
     </link>
 
    <link name="front_laser">
-      <pose>0.22 0 0.065 0 0 0</pose>
+      <pose>0.200 0.0 0.064263 0 0 0</pose>
       <collision name="lidar_sensor_collision">
         <pose>0.0 0 0.0 0 0 0</pose>
         <geometry>
@@ -302,7 +302,9 @@
       </sensor>
     </link>
 
-    
+    <link name="front_laser_mount">
+      <pose>0.200 0.0 0.064263 0 0 0</pose>
+    </link>
 
     <joint name="base_footprint_joint" type="fixed">
       <parent>base_footprint</parent>
@@ -345,10 +347,14 @@
       <child>imu_link</child>
     </joint>
 
+    <joint name="front_laser_mount_joint" type="fixed">
+      <parent>front_mount</parent>
+      <child>front_laser_mount</child>
+    </joint>
+
     <joint name="lidar_joint" type="fixed">
-      <parent>chassis_link</parent>
+      <parent>front_laser_mount</parent>
       <child>front_laser</child>
-      <pose>0.0 0.0 0.065 0 0 0</pose>
     </joint>
     <!--
     Mounting points for accessories in the top channel.
@@ -362,42 +368,48 @@
       - rear b
       - rear
     -->
-    <link name="front_mount"/>
-    <link name="front_b_mount"/>
-    <link name="front_c_mount"/>
-    <link name="rear_mount"/>
-    <link name="rear_b_mount"/>
-    <link name="rear_c_mount"/>
+    <link name="front_mount">
+      <pose>0.200 0.0 0.064263 0 0 0</pose> 
+    </link>
+    <link name="front_b_mount">
+      <pose>0.120 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="front_c_mount">
+      <pose>0.040 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_mount">
+      <pose>-0.080 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_b_mount">
+      <pose>-0.15 0.0 0.064263 0 0 0</pose>
+    </link>
+    <link name="rear_c_mount">
+      <pose>-0.24 0 0.064263 0 0 0</pose>
+    </link>
 
     <joint name="front_c_mount_joint" type="fixed">
       <parent>chassis_link</parent>
       <child>front_c_mount</child>
-      <pose>0.040 0.0 0.064263 0 0 0</pose>
     </joint>
     <joint name="front_b_mount_joint" type="fixed">
       <parent>front_c_mount</parent>
       <child>front_b_mount</child>
-      <pose>0.080 0.0 0.0 0 0 0</pose>
     </joint>
     <joint name="front_mount_joint" type="fixed">
       <parent>front_b_mount</parent>
       <child>front_mount</child>
-      <pose>0.080 0.0 0.0 0 0 0</pose>
     </joint>
     <joint name="rear_c_mount_joint" type="fixed">
       <parent>chassis_link</parent>
       <child>rear_c_mount</child>
-      <pose>-0.040 0 0.064263 0 0 0</pose>
     </joint>
     <joint name="rear_b_mount_joint" type="fixed">
       <parent>rear_c_mount</parent>
       <child>rear_b_mount</child>
-      <pose>-0.080 0.0 0.0 0 0 0</pose>
     </joint>
     <joint name="rear_moint_joint" type="fixed">
       <parent>rear_b_mount</parent>
       <child>rear_mount</child>
-      <pose>-0.080 0.0 0.0 0 0 0</pose>
     </joint>
 
     <!--
@@ -405,11 +417,12 @@
       Use with caution, but thin sensors (e.g Raspberry Pi NoIR camera) could
       be mounted here for low-budget, front-facing capabilities
     -->
-    <link name="front_bumper_mount"></link>
+    <link name="front_bumper_mount">
+      <pose>0.274 0 0.0345125 0 0 0</pose>
+    </link>
     <joint name="front_bumper_mount_joint" type="fixed">
       <parent>chassis_link</parent>
       <child>front_bumper_mount</child>
-      <pose>0.274 0 0.0345125 0 0 0</pose>
     </joint>
 
 

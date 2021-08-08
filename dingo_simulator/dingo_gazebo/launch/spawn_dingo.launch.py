@@ -13,7 +13,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     # Get the sdf file address
-    DINGO_MODEL = 'd' #os.environ['DINGO_MODEL'] #d - o
+    DINGO_MODEL = os.environ['DINGO_MODEL'] #d - o
     model_folder = 'dingo_' + DINGO_MODEL
     model_path = os.path.join(
         get_package_share_directory('dingo_gazebo'),
