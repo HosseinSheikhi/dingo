@@ -2,11 +2,8 @@
 <sdf version="1.5">
   <model name="dingo_o">  
   <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
-  <static>true</static>
+  <static>false</static>
     
-    <link name="base_footprint"/>
-    <link name="base_link"/>
-
     <link name="base_footprint"/>
     <link name="base_link"></link>
 
@@ -355,7 +352,7 @@
       <!-- feel free to change the ray parameters based on your lidar spec -->
       <sensor name="hls_lfcd_lds" type="ray">
         <always_on>true</always_on>
-        <visualize>true</visualize>
+        <visualize>false</visualize>
         <pose>0.0 0 0.05 0 0 0</pose>
         <update_rate>20</update_rate>
         <ray>
@@ -530,6 +527,54 @@
       <child>front_bumper_mount</child>
     </joint>
 
+    <!--
+      This link might be helpfull
+      https://github.com/ros-simulation/gazebo_ros_pkgs/wiki/ROS-2-Migration:-Planar-Move
+    -->
+   <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+
+      <ros>
+
+        <!-- Add a namespace -->
+        <!--         
+        <namespace>/demo</namespace> -->
+
+        <!-- Remap the default topic -->
+        <!-- <argument>cmd_vel:=custom_cmd_vel</argument>
+        <argument>odom:=custom_odom</argument> -->
+
+      </ros>
+
+      <!-- Set control loop update rate -->
+      <update_rate>30</update_rate>
+      <!-- Set odom publish rate -->
+      <publish_rate>30</publish_rate>
+
+      <!-- Set if odom required -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+
+      <!-- Frame IDs -->
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+
+      <!-- Set odom covariance -->
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+
+    </plugin>
     
+    <plugin name="dingo_o_joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+      <ros>
+        <remapping>~/out:=joint_states</remapping>
+      </ros>
+      <update_rate>30</update_rate>
+      <joint_name>front_left_wheel_joint</joint_name>
+      <joint_name>front_right_wheel_joint</joint_name>
+      <joint_name>rear_left_wheel_joint</joint_name>
+      <joint_name>rear_right_wheel_joint</joint_name>
+    </plugin> 
+
   </model>
 </sdf>
