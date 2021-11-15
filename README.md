@@ -1,5 +1,5 @@
 # dingo
-This repository includes driver and simulation packages for Clear Path Dingo Robot in ROS2.
+This repository includes driver and simulation packages for Clear Path Dingo Robot. Sim packages are in ROS2 and real robot drivers are in ROS noetic.
 
 # Note:
 The main differences with official Dingo package
