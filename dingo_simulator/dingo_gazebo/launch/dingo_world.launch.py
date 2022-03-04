@@ -31,12 +31,12 @@ def generate_launch_description():
 
     declare_x_pose_cmd = DeclareLaunchArgument(
         'x_pose',
-        default_value='0.0',
+        default_value='-3.0',
         description='x position of the robot at the begining')
 
     declare_y_pose_cmd = DeclareLaunchArgument(
         'y_pose',
-        default_value='0.0',
+        default_value='3.0',
         description='y position of the robot at the begining')
 
     declare_world_cmd = DeclareLaunchArgument(
