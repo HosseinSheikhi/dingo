@@ -62,8 +62,9 @@
         <gravity>1</gravity>
       </link>
     </model>
-    <model name="camera_model">
-      <pose>0 0 3.5 0 1.57079 1.57079</pose>
+    
+    <model name="camera_model_1">
+      <pose>5.5 -1 3.5 0 1.57079 1.57079</pose>
       <static>true</static>
       <link name="camera_link">
         <sensor type="camera" name="camera">
@@ -102,6 +103,48 @@
         </sensor>
       </link>
     </model>
+    
+    <model name="camera_model_2">
+      <pose>-1 -1 3.5 0 1.57079 1.57079</pose>
+      <static>true</static>
+      <link name="camera_link">
+        <sensor type="camera" name="camera">
+          <update_rate>60</update_rate>
+          <visualize>true</visualize>
+          <camera name="head">
+            <horizontal_fov>1.7962634</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>500</far>
+            </clip>
+            <noise>
+              <type>gaussian</type>
+              <!-- Noise is sampled independently per pixel on each frame.
+                   That pixel's noise value is added to each of its color
+                   channels, which at that point lie in the range [0,1]. -->
+              <mean>0.0</mean>
+              <stddev>0.007</stddev>
+            </noise>
+          </camera>
+          <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+            <ros>
+              <namespace>overhead_cam_2</namespace>
+              <!-- TODO(louise) Remapping not working due to https://github.com/ros-perception/image_common/issues/93 -->
+              <argument>image_raw:=image_raw</argument>
+              <argument>camera_info:=camera_info</argument>
+            </ros>
+            <!-- camera_name>omit so it defaults to sensor name</camera_name-->
+            <!-- frame_name>omit so it defaults to link name</frameName-->
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+    
     <physics type='ode'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
