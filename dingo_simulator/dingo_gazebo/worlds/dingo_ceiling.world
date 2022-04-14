@@ -68,7 +68,7 @@
       <static>true</static>
       <link name="camera_link">
         <sensor type="camera" name="camera">
-          <update_rate>60</update_rate>
+          <update_rate>1</update_rate>
           <visualize>true</visualize>
           <camera name="head">
             <horizontal_fov>1.7962634</horizontal_fov>
@@ -109,7 +109,7 @@
       <static>true</static>
       <link name="camera_link">
         <sensor type="camera" name="camera">
-          <update_rate>60</update_rate>
+          <update_rate>1</update_rate>
           <visualize>true</visualize>
           <camera name="head">
             <horizontal_fov>1.7962634</horizontal_fov>
@@ -150,7 +150,7 @@
       <static>true</static>
       <link name="camera_link">
         <sensor type="camera" name="camera">
-          <update_rate>60</update_rate>
+          <update_rate>1</update_rate>
           <visualize>true</visualize>
           <camera name="head">
             <horizontal_fov>1.7962634</horizontal_fov>
@@ -191,7 +191,7 @@
       <static>true</static>
       <link name="camera_link">
         <sensor type="camera" name="camera">
-          <update_rate>60</update_rate>
+          <update_rate>1</update_rate>
           <visualize>true</visualize>
           <camera name="head">
             <horizontal_fov>1.7962634</horizontal_fov>
